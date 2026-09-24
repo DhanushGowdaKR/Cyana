@@ -6,7 +6,6 @@ import androidx.compose.animation.core.animateValueAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
@@ -37,15 +35,14 @@ fun DrumPadButton(
     padName: String,
     onClick: () -> Unit
 ) {
-    val density = LocalDensity.current
     var isPressed by remember {
         mutableStateOf(false)
     }
     val dpOffset by animateValueAsState(
         targetValue = if (isPressed) {
-            DpOffset(0.dp, 0.dp)
+            DpOffset(5.5.dp, 5.5.dp)
         } else {
-            DpOffset(6.dp, 6.dp)
+            DpOffset(8.dp, 8.dp)
         },
         typeConverter = TwoWayConverter<DpOffset, AnimationVector2D>(
             convertToVector = {
@@ -63,22 +60,22 @@ fun DrumPadButton(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .clickable(onClick = onClick)
             .pointerInput(Unit) {
                 detectTapGestures(
                     onPress = {
                         isPressed = true
+                        onClick()
                         tryAwaitRelease()
                         isPressed = false
-                    },
+                    }
                 )
             }
             .graphicsLayer {
-                translationX = with(density) {-dpOffset.x.toPx()}
-                translationY = with(density) {-dpOffset.y.toPx()}
+                translationX = -dpOffset.x.toPx()
+                translationY = -dpOffset.y.toPx()
             }
             .dropShadow(
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(8.dp),
                 shadow = Shadow(
                     radius = 0.dp,
                     color = Color(0xFFBC321A),
@@ -86,8 +83,8 @@ fun DrumPadButton(
                     offset = dpOffset
                 )
             )
-            .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(16.dp))
-            .background(color = CyanaTheme.colorScheme.drumPad, shape = RoundedCornerShape(16.dp)),
+            .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(8.dp))
+            .background(color = CyanaTheme.colorScheme.drumPad, shape = RoundedCornerShape(8.dp)),
         contentAlignment = Alignment.Center
     ) {
         Text(

@@ -10,8 +10,8 @@ val drumPads = listOf(
     DrumPad(2, "SNARE"),
     DrumPad(3, "C HIGH-HAT"),
     DrumPad(4, "O HIGH-HAT"),
-    DrumPad(5, "CLAP"),
-    DrumPad(6, "LOW TOM"),
+    DrumPad(5, "FLOOR TOM"),
+    DrumPad(6, "MID TOM"),
     DrumPad(7, "HIGH TOM"),
     DrumPad(8, "CRASH")
 )

@@ -20,7 +20,7 @@ import dev.dhanushgowda.cyana.presentation.theme.CyanaTheme
 class MainActivity : ComponentActivity() {
     val drumMachine = DrumMachine()
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        drumMachine.loadSamples(assets)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
